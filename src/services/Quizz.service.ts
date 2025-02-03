@@ -11,3 +11,10 @@ export async function fetchQuiz(nbQuizzPerRequest: number): Promise<QuizResponse
 
   return result;
 }
+
+export async function fetchQuizById(id: number): Promise<QuizResponseWP[]> {
+  const response = await fetch(VITE_QUIZZ_URL_WP + `wp-json/wp/v2/quiz/${id}`);
+
+  const result: QuizResponseWP[] = await response.json();
+  return result;
+}

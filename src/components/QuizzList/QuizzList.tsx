@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { QuizResponseWP } from "../../types/Quizz";
 import Quizz from "../Quizz/Quizz";
 import { fetchQuiz } from "../../services/Quizz.service";
-import Question from "../Question/Question";
 
 const nbQuizzPerRequest = 2;
 
