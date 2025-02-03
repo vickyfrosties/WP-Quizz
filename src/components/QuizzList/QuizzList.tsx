@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { QuizResponseWP } from "../../types/Quizz";
 import Quizz from "../Quizz/Quizz";
 import { fetchQuiz } from "../../services/Quizz.service";
+import Question from "../Question/Question";
 
 const nbQuizzPerRequest = 2;
 
 const QuizzList = () => {
 
   const [quizz, setQuizz] = useState<QuizResponseWP[]>([]);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     fetchQuiz(nbQuizzPerRequest)
@@ -30,14 +35,35 @@ const QuizzList = () => {
         ) : (
           <p>Aucun quiz trouvé.</p>
         )}
+
+        <button onClick={handleClick}>Commencer le quiz</button>
+      </div>
+
+      <div>
+        {quizz.map((questionObj, index) => (
+          <div key={index}>
+            {questionObj.association_avec_les_questions.map((questions, qIndex) => (
+              <div key={qIndex}>
+                <p>{questions.question_quizz}</p>
+                <p>{questions.contenu}</p>
+                <p>La réponse est : {questions.reponses_accepteees} </p>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
 
       {/* <div>
-        Bienvenue sur : {quizz.map(quiz =>
-          <p> {quiz.association_avec_les_questions.map(question =>
-            <p> {question.question_quizz} </p>
-          )} </p>
-        )}
+        <Question key={quizz.map(question => {
+          question.association_avec_les_questions.map(questions => 
+            <p>
+              {questions.question_quizz}
+            </p>
+            <p>
+            {questions.contenu}
+          </p>
+          );
+        })} />
       </div> */}
     </>
   );

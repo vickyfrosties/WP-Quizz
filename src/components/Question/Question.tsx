@@ -1,18 +1,18 @@
 
 type QuestionProps = {
-    ID: number,
+    id: number,
     question_quizz: string;
     contenu: string,
     reponses_accepteees: string,
     _association_avec_un_quiz: number;
 };
 
-const Question = ({ ID, question_quizz, contenu, reponses_accepteees, _association_avec_un_quiz }: QuestionProps) => {
+const Question = ({ id, question_quizz, contenu, reponses_accepteees, _association_avec_un_quiz }: QuestionProps) => {
 
     return (
         <>
             <div>
-                <h2>Question : {question_quizz} n° {ID} </h2>
+                <h2>Question : {question_quizz} n° {id} </h2>
                 <p>
                     {contenu}
                 </p>
