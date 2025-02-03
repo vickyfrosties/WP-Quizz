@@ -2,13 +2,12 @@ import { QuizResponseWP } from "../types/Quizz";
 
 const { VITE_QUIZZ_URL_WP } = import.meta.env;
 
+export async function fetchQuiz(): Promise<QuizResponseWP[]> {
 
-export async function fetchQuiz(nbQuizzPerRequest: number): Promise<QuizResponseWP[]> {
-
-  const response = await fetch(VITE_QUIZZ_URL_WP + `wp-json/wp/v2/quiz?per_page=${nbQuizzPerRequest}`);
+  const response = await fetch(VITE_QUIZZ_URL_WP + "/wp-json/wp/v2/quiz?per_page=100");
 
   const result: QuizResponseWP[] = await response.json();
-
+  console.log("Fetched Quizzes:", result);
   return result;
 }
 

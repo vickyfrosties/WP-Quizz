@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import QuizzList from "./components/QuizzList/QuizzList";
-import Question from "./components/Question/Question";
+import QuestionDetails from "./components/Question/QuestionDetails";
 
 function App() {
 
@@ -8,8 +8,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<QuizzList />} />
-        <Route path="/quiz/:id" element={<Question />} />
-
+        <Route path="/quiz/:quizzId" element={<QuestionDetails />} />
       </Routes>
     </>
   );

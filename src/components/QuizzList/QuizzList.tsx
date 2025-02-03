@@ -1,24 +1,16 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { QuizResponseWP } from "../../types/Quizz";
-import Quizz from "../Quizz/Quizz";
 import { fetchQuiz } from "../../services/Quizz.service";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const nbQuizzPerRequest = 2;
-
+// affichage des quizz 
 const QuizzList = () => {
 
   const [quizz, setQuizz] = useState<QuizResponseWP[]>([]);
-  const navigate = useNavigate();
-  const id = useId();
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    navigate(`/quiz/${id}`);
-  };
+  const { quizzId } = useParams();
 
   useEffect(() => {
-    fetchQuiz(nbQuizzPerRequest)
+    fetchQuiz()
       .then(setQuizz)
       .catch(err => console.error("Erreur de chargement des quiz:", err));
   }, []);
@@ -26,21 +18,19 @@ const QuizzList = () => {
   return (
     <>
       <div>
-        <h1>Liste des Quiz</h1>
-        {quizz.length > 0 ? (
-          quizz.map(quiz =>
-            <Quizz key={quiz.id}
-              id={quiz.id}
-              title={quiz.title.rendered}
-              image={quiz.image.guid}
-              description={quiz.description}
-              difficulte={quiz.difficulte[0]}
-              statut={quiz.statut[0]} />)
-        ) : (
-          <p>Aucun quiz trouvé.</p>
-        )}
+        <h1>Liste des Quiz {quizzId} </h1>
 
-        <button onClick={handleClick}>Commencer le quiz</button>
+        {quizz.map((quiz) => {
+          return (
+            <div key={quiz.id}>
+              <p> {quiz.titre} </p>
+              <img src={quiz.image.guid} alt="" />
+              <p> {quiz.description} </p>
+              <p> Niveau du quizz : {quiz.difficulte} </p>
+              <p> État du quizz : {quiz.statut} </p>
+            </div>
+          );
+        })}
       </div>
     </>
   );
