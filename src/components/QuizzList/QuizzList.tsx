@@ -52,19 +52,6 @@ const QuizzList = () => {
           </div>
         ))}
       </div>
-
-      {/* <div>
-        <Question key={quizz.map(question => {
-          question.association_avec_les_questions.map(questions => 
-            <p>
-              {questions.question_quizz}
-            </p>
-            <p>
-            {questions.contenu}
-          </p>
-          );
-        })} />
-      </div> */}
     </>
   );
 };
