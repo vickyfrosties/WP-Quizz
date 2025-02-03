@@ -1,4 +1,3 @@
-import './App.css';
 import QuizzList from "./components/QuizzList/QuizzList";
 
 function App() {
